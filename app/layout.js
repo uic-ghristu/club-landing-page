@@ -1,9 +1,16 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Merriweather } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
-  subsets: ["latin"]
-})
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-merriweather",
+});
 
 export const metadata = {
   title: "Unstop Igniters Club",
@@ -14,7 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased w-full container mx-auto max-w-7xl`}
+        className={`${inter.className} ${merriweather.variable} antialiased w-full container mx-auto max-w-7xl`}
       >
         {children}
       </body>
