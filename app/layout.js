@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Inter, Merriweather } from "next/font/google";
+import { Inter, Merriweather } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
