@@ -7,17 +7,17 @@ import { buttonVariants } from "../ui/button";
 import Image from "next/image";
 import { HERO_VARIANTS, HERO_IMAGES } from "@/lib/constants/banner";
 
-function useTypewriter(text, speed = 30) {
+function useTypewriter(text = "", speed = 30) {
   const [displayed, setDisplayed] = useState("");
 
   useEffect(() => {
-    setDisplayed("");
+    if (!text) return;
+
     let i = 0;
 
     const interval = setInterval(() => {
-      setDisplayed((prev) => prev + text[i]);
+      setDisplayed(text.substring(0, i + 1));
       i++;
-
       if (i >= text.length) {
         clearInterval(interval);
       }
@@ -28,13 +28,13 @@ function useTypewriter(text, speed = 30) {
 
   return displayed;
 }
-
 export default function HeroSection() {
   const [background, setBackground] = useState(HERO_IMAGES[0]);
 
   const thumbnails = HERO_IMAGES.filter((img) => img !== background);
-  const { label, href, text } = HERO_VARIANTS[background];
-  const typedText = useTypewriter(text, 12);
+  const { label, href, text, heading } = HERO_VARIANTS[background];
+  const typedText = useTypewriter(text, 13);
+  const typedHeading = useTypewriter(heading, 15);
   return (
     <section className="w-full">
       <div
@@ -58,7 +58,7 @@ export default function HeroSection() {
 
         <div className="relative z-10 md:order-1 order-2 flex flex-col justify-center gap-y-6 py-10">
           <h1 className="text-4xl md:text-5xl font-extrabold font-merriweather leading-tight">
-            Ignite. Execute. Dominate.
+            {typedHeading}
           </h1>
 
           <p className="max-w-lg text-slate-100 font-semibold">{typedText}</p>
